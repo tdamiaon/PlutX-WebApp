@@ -1,1 +1,9 @@
-"*.pyc\n*.pyo\n__pycache__/\n.env\ndb.sqlite3\n/staticfiles/\nmedia/\nvenv/" 
+*.pyc
+*.pyo
+__pycache__/
+.env
+db.sqlite3
+/staticfiles/
+/media/
+venv/
+
