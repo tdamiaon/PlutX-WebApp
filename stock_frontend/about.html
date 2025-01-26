@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+			<a href="index.html" class="logo">PLUTX</a>
+			<a href="index.html" class="nav-link">HOME</a>
+			<a href="about.html" class="nav-link">ABOUT</a>
+			<button id="login-button">LOGIN</button>
+			<button id="signup-button">SIGN UP</button>
+            <div id="user-profile" class="user-profile" style="display: none;">
+				<img src="/imgs/user.png" alt="User" id="userimage" class="userimage">
+				<span id="name" class="name">name</span>
+			</div>
+            <button id="signOutButton" style="display: none; position: absolute;">SignOut</button>
+        </nav>
+    </header>
+    <main>
+        <h1 class="title">About PlutX</h1>
+        <p class="text">BLLLAA BLABLABLBLAA</p>
+    </main>
+
+
+
+
+	<div id="modal-overlay" class="hidden">
+      <div id="modal">
+        <button id="close-modal" class="close-btn">×</button> 
+		<button id="view_pass" class="view_pass"><i class="fas fa-eye"></i></button> 
+        <h2>Login or Sign Up</h2>
+        <form>
+          <label for="username">Username:</label>
+          <input type="username" id="username" name="username" required>
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required>
+		  <label class="wrongLogin" id ="wrongLogin">Incorrect username or password</label>
+          <button type="submit" id="loginButton">Enter Your Account</button>
+          <button type="submit" id ="signupButton">Create New Account</button>
+        </form>
+      </div>
+    </div>
+	<script src="js/scripts.js"></script>
+</body>
+</html>

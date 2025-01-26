@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chartjs-chart-financial"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@1.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Company</title>
+	<link rel="stylesheet" href="css/styles.css">
+	<style>
+		body{background: black;}
+	</style>
+</head>
+<body>
+	
+	<header>
+		<nav>
+			<a href="index.html" class="logo">PLUTX</a>
+			<a href="index.html" class="nav-link">HOME</a>
+			<a href="about.html" class="nav-link">ABOUT</a>
+			<button id="login-button">LOGIN</button>
+			<button id="signup-button">SIGN UP</button>
+			<div id="user-profile" class="user-profile" style="display: none;">
+				<img src="/imgs/user.png" alt="User" id="userimage" class="userimage">
+				<span id="name" class="name">name</span>
+			</div>
+			<button id="signOutButton" style="display: none; position: absolute;">SignOut</button>
+		</nav>
+	</header>
+	<main>
+		<div id="loading-overlay">Loading...</div>
+
+		<div class="input-container">
+			<input type="search" id="search" name="search" class="search-bar">
+			<span class="search-icon"><i class="fas fa-search"></i></span></div>
+		<h1 class="company-title" id="company-title">
+			Company Name
+			<button id="favorite-button" class="favorite-button">
+				<i class="fas fa-heart"></i>
+			</button>
+		</h1>
+		<div class="mainNumbers">
+			<div id="last-price" class="last-price"></div>
+			<div id="variations" class="variations"></div>
+		</div>
+		<div class="key-value-box">
+			<div class="key-value-row"><span class="key">Annual Variation</span> <span class="value" id="annual-variation"></span></div>
+			<div class="key-value-row"><span class="key">Average Volume</span> <span class="value" id="average-volume"></span></div>
+			<div class="key-value-row"><span class="key">Dividend Yield</span> <span class="value" id="dividend-yield"></span></div>
+			<div class="key-value-row"><span class="key">Market Cap</span> <span class="value" id="market-cap"></span></div>
+			<div class="key-value-row"><span class="key">Trailing P/E</span> <span class="value" id="trailingPE"></span></div>
+			<div class="key-value-row"><span class="key">Revenue Growth (1Year)</span> <span class="value" id="revenueGrowth"></span></div>
+			<div class="key-value-row"><span class="key">Net Income to Common</span> <span class="value" id="netIncomeToCommon"></span></div>
+			<div class="key-value-row"><span class="key">Gross Margins</span> <span class="value" id="grossMargins"></span></div>
+			<div class="key-value-row"><span class="key">Beta (Volatility)</span> <span class="value" id="beta"></span></div>
+			<div class="key-value-row"><span class="key">CEO</span> <span class="value" id="ceo"></span></div>
+			<div class="key-value-row"><span class="key">Headquarters</span> <span class="value" id="headquarters"></span></div>
+			<div class="key-value-row"><span class="key">Employees</span> <span class="value" id="employees"></span></div>
+			<div class="key-value-row"><span class="key">WebSite</span> <span class="value" id="website"></span></div>
+		</div>
+
+	    <div class="timeframe-buttons">
+			<button class="timeframe-button selected" data-period="1D">1D</button>
+			<button class="timeframe-button" data-period="1M">1M</button>
+			<button class="timeframe-button" data-period="6M">6M</button>
+			<button class="timeframe-button" data-period="YTD">YTD</button>
+			<button class="timeframe-button" data-period="1Y">1Y</button>
+			<button class="timeframe-button" data-period="5Y">5Y</button>
+			<button class="timeframe-button" data-period="MAX">MAX</button>
+		</div>
+		<div class="chart-type-buttons">
+			<button class="chart-type-button selected" data-chart="Line">Line</button>
+			<button class="chart-type-button" data-chart="Candlestick">Candlestick</button>
+		</div>
+		<canvas id="myChart"></canvas>
+		<text id="text-company" class="text-company">Unavailable</text>
+
+		<div class="predict-container">
+			<h1 class="predict-title">AI Market Variation Prediction</h1>
+			<div class="input-days">
+				<input type="number" id="days" placeholder="Enter number of days ahead..." min="1">
+				<i class="fas fa-calendar-alt"></i>
+			</div>
+			<button class="predict-button" onclick="predictVariation()">Predict</button>
+			<div id="result" class="result" style="display: none;">Result will appear here...</div>
+			<div class="viability-indicator">
+				<span class="viability-text">Viability: <strong id="viability-label">Unknown</strong></span>
+				<div class="viability-bar">
+					<div id="viability-fill"></div>
+				</div>
+			</div>
+		</div>
+
+	</main>
+
+
+
+
+
+
+
+
+	<div id="modal-overlay" class="hidden">
+      <div id="modal">
+        <button id="close-modal" class="close-btn">×</button> 
+		<button id="view_pass" class="view_pass"><i class="fas fa-eye"></i></button> 
+        <h2>Login or Sign Up</h2>
+        <form>
+          <label for="username">Username:</label>
+          <input type="username" id="username" name="username" required>
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required>
+		  <label class="wrongLogin" id ="wrongLogin">Incorrect username or password</label>
+          <button type="submit" id="loginButton">Enter Your Account</button>
+          <button type="submit" id ="signupButton">Create New Account</button>
+        </form>
+      </div>
+    </div>
+	<script src="js/scripts.js"></script>
+</body>
+</html>
